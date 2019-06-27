@@ -1,21 +1,21 @@
 import sys
 import os
-import tkinter as tk
+import tkinter
 from tkinter import *
 # import pandas as pd
 import xlrd
 import datetime
-
-m = tk.Tk()
+selection = 1
+# m = tkinter.Tk()
 # m.geometry("500X500")
-m.title('html creator')
+# m.title('html creator')
 
 # m.pack()
 # E = Entry(m,path)
 
-path ='F:/Downloads/Financial Sample.xlsx'
+path ='June19-Mailing.xlsx'
 wb = xlrd.open_workbook(path)
-sh = wb.sheet_by_name('20May19')
+sh = wb.sheet_by_name("28 June'19")
 # sh = wb.sheet_names()
 # print(sh)
 # sheet = wb.sheet_by_index(1)
@@ -39,23 +39,37 @@ n = 2
 # df = pd.read_excel (r'F:/Downloads/Financial Sample.xlsx') #for an earlier version of Excel, you may need to use the file extension of 'xls'
 # print (df)
 # print(sh.cell_value(0,1))
-name = None
-for i in range(sh.nrows):
-	if(i==0):
-		continue
-	for j in range(sh.ncols):
-		if(j == 0):
-			name = sh.cell_value(i,j)
-			continue
-			# elif(j == n):
-			# 	continue
+doubleColHtml = """<table><tr>"""
+section = 1
+if(selection == 1):
+	a =  open(htmlTitle+".txt", "w+")
+	a.write('')
+	name = None
+	for h in range(0,section):
 		
-		data = """<a href='"""+sh.cell_value(i,j)+"""'>"""+	name + """</a><br/>"""
-		print(name)
-		print(sh.cell_value(i,j))
-		a =  open(htmlTitle+".html", "a")
-		a.write(data)
+		for i in range(sh.nrows):
+			a =  open(htmlTitle+".txt", "a+")
+			
+			if(i==0):
+				continue
+			else:
+				a.write("""<tr>\n""")
+				for j in range(i,i+2):
+					if(j == 0):
+						name = sh.cell_value(i,j)
+						continue
+						# elif(j == n):
+						# 	continue
+					
+					data = """<td><a href='"""+sh.cell_value(j,1)+"""'><img src='https://www.eduonix.com/mailing_img/mailings_"""+dateToday+"/"+sh.cell_value(j,2)+"""'></a></td>"""
+					print(data)
+					# print(sh.cell_value(i,j))
+					a =  open(htmlTitle+".txt", "a+")
+					a.write(data)
+				a.write("""</tr>\n""")
 		
-
+# button = Button(m,text='submit',command = quit_loop)
+# button.pack(side = BOTTOM)
+# button.place(x=200,y=120)
 
 # m.mainloop()
