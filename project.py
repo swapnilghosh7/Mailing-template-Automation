@@ -1,75 +1,72 @@
 import sys
 import os
 import tkinter
-from tkinter import *
-# import pandas as pd
-import xlrd
-import datetime
-selection = 1
-# m = tkinter.Tk()
-# m.geometry("500X500")
-# m.title('html creator')
+import templateGenerator as tg
 
-# m.pack()
-# E = Entry(m,path)
+
+# import pandas as pd 
+
+from tkinter import *
+selection = 1
+m=tkinter.Tk()
+m.title('zip creator Extractor')
+m.geometry("400x500")
+
+variable = IntVar()
+
+option = StringVar()
+my_list = []
+
+E = Entry(m, bd=5, width=50)
 
 path ='June19-Mailing.xlsx'
-wb = xlrd.open_workbook(path)
-sh = wb.sheet_by_name("28 June'19")
-# sh = wb.sheet_names()
-# print(sh)
-# sheet = wb.sheet_by_index(1)
-x = datetime.datetime.now()
-dateToday = x.strftime("%d")+x.strftime("%b")+x.strftime("%y")
-htmlTitle = "template"+dateToday
-txt = """<!DOCTYPE html>
-<html>
-<head>
-	<title>"""+htmlTitle+"""</title>
-	<link rel="stylesheet" type="text/css" href="login.css">
-</head>
-<body>"""
-f = open(htmlTitle+".html", "w+")
-f.write(txt)
-n = 2
-# print(sh.ncols)	
-# sheet = wb.sheet_by_index(0)
-# m = tk.Tkinter()
-# sheet.ncols
-# df = pd.read_excel (r'F:/Downloads/Financial Sample.xlsx') #for an earlier version of Excel, you may need to use the file extension of 'xls'
-# print (df)
-# print(sh.cell_value(0,1))
-doubleColHtml = """<table><tr>"""
-section = 1
-if(selection == 1):
-	a =  open(htmlTitle+".txt", "w+")
-	a.write('')
-	name = None
-	for h in range(0,section):
-		
-		for i in range(sh.nrows):
-			a =  open(htmlTitle+".txt", "a+")
-			
-			if(i==0):
-				continue
-			else:
-				a.write("""<tr>\n""")
-				for j in range(i,i+2):
-					if(j == 0):
-						name = sh.cell_value(i,j)
-						continue
-						# elif(j == n):
-						# 	continue
-					
-					data = """<td><a href='"""+sh.cell_value(j,1)+"""'><img src='https://www.eduonix.com/mailing_img/mailings_"""+dateToday+"/"+sh.cell_value(j,2)+"""'></a></td>"""
-					print(data)
-					# print(sh.cell_value(i,j))
-					a =  open(htmlTitle+".txt", "a+")
-					a.write(data)
-				a.write("""</tr>\n""")
-		
-# button = Button(m,text='submit',command = quit_loop)
-# button.pack(side = BOTTOM)
-# button.place(x=200,y=120)
 
-# m.mainloop()
+
+l1 = Label(m, text = "Please Enter Number of Section")
+l1.pack(side= LEFT)
+l1.place(x=10,y=10)
+# button
+E1= Entry(m, bd=5, width=5)
+E1.pack(side= LEFT)
+E1.place(x=80,y=10)
+
+
+def getNumber():
+	number = E1.get()
+	if(number.isnumeric()):
+		number = int(number,10)
+		for i in range(0,number):
+
+				# textCol = str(j+1) + "1 Coloumn"
+				variable.set(i)
+				print(variable.get())
+				
+
+				RadiobuttonWrapOne = Radiobutton(m, text= "1 Coloumn", variable = variable,value= 1,var = option)
+				RadiobuttonWrapOne.grid(row = i+1, column=1)
+
+				RadiobuttonWrapTwo = Radiobutton(m, text= "2 Coloumn", variable = variable,value= 2, var = option)
+				RadiobuttonWrapTwo.grid(row = i+1, column=2)
+				
+				RadiobuttonWrapThree = Radiobutton(m, text= "3 Coloumn", variable = variable,value= 3, var = option)
+				RadiobuttonWrapThree.grid(row = i+1, column=3)
+
+		# tg.genertateTemplate(path,selection)
+		button1 = Button(m,text='submit', command = lambda: getValues(number) )
+		button1.place(x=200,y=120)
+
+def getValues(number):
+		for i in range(0,number):
+			print(variable.get())
+			if(variable.get() == i):
+			
+				selection = variable.get()
+				print(selection)
+			# tg.genertateTemplate(path,selection)
+
+		
+button = Button(m,text='submit',command = getNumber)
+button.pack(side = BOTTOM)
+button.place(x=200,y=120)
+
+m.mainloop()
