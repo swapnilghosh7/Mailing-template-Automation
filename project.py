@@ -33,36 +33,55 @@ E1.place(x=80,y=10)
 
 def getNumber():
 	number = E1.get()
+	E1.destroy()
+	l1.destroy()
+	button.destroy()
 	if(number.isnumeric()):
 		number = int(number,10)
+		entries = []
 		for i in range(0,number):
-
+				newrow = []
 				# textCol = str(j+1) + "1 Coloumn"
-				variable.set(i)
-				print(variable.get())
 				
+				l2 = Label(m, text = "Enter number of coloumn",wraplength=100).grid(row=i, column=1)
+				# button
+				E2 = Entry(m, bd=5, width=5)
+				E2.grid(row=i, column=2)
 
-				RadiobuttonWrapOne = Radiobutton(m, text= "1 Coloumn", variable = variable,value= 1,var = option)
-				RadiobuttonWrapOne.grid(row = i+1, column=1)
 
-				RadiobuttonWrapTwo = Radiobutton(m, text= "2 Coloumn", variable = variable,value= 2, var = option)
-				RadiobuttonWrapTwo.grid(row = i+1, column=2)
-				
-				RadiobuttonWrapThree = Radiobutton(m, text= "3 Coloumn", variable = variable,value= 3, var = option)
-				RadiobuttonWrapThree.grid(row = i+1, column=3)
+				l3 = Label(m, text = "Start and End Row Number",wraplength=100).grid(row=i, column=3)
+				# button
+				E3 = Entry(m, bd=5, width=5)
+				E3.grid(row=i, column=4) 
+				E4 = Entry(m, bd=5, width=5)
+				E4.grid(row=i, column=5)
+				newrow.append(E2)
+				newrow.append(E3)
+				newrow.append(E4)
+				entries.append(newrow)
 
-		# tg.genertateTemplate(path,selection)
-		button1 = Button(m,text='submit', command = lambda: getValues(number) )
-		button1.place(x=200,y=120)
+		print(entries)
 
-def getValues(number):
-		for i in range(0,number):
-			print(variable.get())
-			if(variable.get() == i):
-			
-				selection = variable.get()
-				print(selection)
-			# tg.genertateTemplate(path,selection)
+		button1 = Button(m,text='submit', command = lambda : getValues()).grid(row=i+1, column=3)
+
+	def getValues():
+		for entry in entries:
+			# x = E2.get()
+			for index, obj in enumerate(entry):
+				print(index,obj.get())
+				if(index == 0):
+					selection = obj.get()
+				if(index == 1):
+					R1 = obj.get()
+				if(index == 2):
+					R2 = boj.get()
+			# y = self.E3.get()
+			# z = self.E4.get()
+			# print(E2.get())
+			tg.genertateTemplate(path,selection,R1,R2)
+		
+
+
 
 		
 button = Button(m,text='submit',command = getNumber)
