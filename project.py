@@ -10,9 +10,19 @@ from tkinter import *
 selection = 1
 m=tkinter.Tk()
 m.title('zip creator Extractor')
-m.geometry("400x500")
+m.geometry("600x300")
 
 variable = IntVar()
+startTxt = """<head>
+    <title>Eduonix</title>
+    <META NAME="robots" CONTENT="noindex">
+    <link rel="shortcut icon" href="https://www.eduonix.com/assets/images/favicon.ico">
+</head>
+
+<body>
+    <center>
+        <table cellspacing="0" cellpadding="0" border="0" width="640" style="background-color: #fff;">
+        """
 
 option = StringVar()
 my_list = []
@@ -55,12 +65,23 @@ def getNumber():
 				E3.grid(row=i, column=4) 
 				E4 = Entry(m, bd=5, width=5)
 				E4.grid(row=i, column=5)
+
+				l4 = Label(m, text = "Start and End Coloumn Number",wraplength=100).grid(row=i, column=6)
+				# button
+				E5 = Entry(m, bd=5, width=5)
+				E5.grid(row=i, column=7) 
+				E6 = Entry(m, bd=5, width=5)
+				E6.grid(row=i, column=8)
+
+
 				newrow.append(E2)
 				newrow.append(E3)
 				newrow.append(E4)
+				newrow.append(E5)
+				newrow.append(E6)
 				entries.append(newrow)
 
-		print(entries)
+
 
 		button1 = Button(m,text='submit', command = lambda : getValues()).grid(row=i+1, column=3)
 
@@ -74,15 +95,24 @@ def getNumber():
 				if(index == 1):
 					R1 = obj.get()
 				if(index == 2):
-					R2 = boj.get()
-			# y = self.E3.get()
-			# z = self.E4.get()
-			# print(E2.get())
-			tg.genertateTemplate(path,selection,R1,R2)
-		
+					R2 = obj.get()
+				if(index == 3):
+					C1 = obj.get()
+				if(index == 4):
+					C2 = obj.get()
+			tg.genertateTemplate(path,selection,R1,R2,C1,C2)
 
+def moreStrip():
+	gridCol = gridCol + 1
+	S = Entry(m, bd=5, width=5)
+	S.grid(row=gridCol, column=2)
 
+gridCol = 1
+Sl1 = Label(m, text = "Strip 1",wraplength=100).grid(row=1, column=1)
+S = Entry(m, bd=5, width=5)
+S.grid(row=gridCol, column=2)
 
+button = Button(m,text='submit',command = moreStrip)
 		
 button = Button(m,text='submit',command = getNumber)
 button.pack(side = BOTTOM)
