@@ -1,4 +1,5 @@
-	
+let $ = require('./jquery-3.4.1.min.js')
+let fs = require('fs')	
 $('.frontSubmitBtn').on('click',()=>{
 	$('.bannerUrl').each(function(){
 		$(".result").append($(this).val()+"<br/>")
