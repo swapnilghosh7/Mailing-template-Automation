@@ -1,0 +1,11 @@
+.removeBanner,.removeStrip{
+	font-size: 10px;
+	padding: 5px 10px;
+}
+.template-input{
+	width: 50px;
+	margin-right: 30px;
+}
+.templateNameInput{
+	width: 300px;
+}
