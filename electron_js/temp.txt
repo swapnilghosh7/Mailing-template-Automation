@@ -1,14 +1,14 @@
 <td align='center'><table>
 <tr>
-<td><a href='https://www.eduonix.com/learn-machine-learning-by-building-projects?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='1.jpg'></a></td> <td> &nbsp;</td> 
-<td><a href='https://www.eduonix.com/courses/Web-Development/the-full-stack-web-development?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='2.jpg'></a></td> <td> &nbsp;</td> </tr>
+<td align="center"><a href='https://www.eduonix.com/javascript-fundamentals-2018-es6-for-beginners?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/01.jpg'></a></td> <td> &nbsp;</td> 
+<td align="center"><a href='https://www.eduonix.com/angular-2-and-nodejs-the-mean-stack-guide?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/02.jpg'></a></td> <td> &nbsp;</td> </tr>
 <tr>
-<td><a href='https://www.eduonix.com/courses/Web-Development/projects-in-laravel-learn-laravel-building-10-projects?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='3.jpg'></a></td> <td> &nbsp;</td> 
-<td><a href='https://www.eduonix.com/the-complete-web-development-course-build-15-projects?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='4.jpg'></a></td> <td> &nbsp;</td> </tr>
+<td align="center"><a href='https://www.eduonix.com/tensorflow-for-practitioners-with-python?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/03.jpg'></a></td> <td> &nbsp;</td> 
+<td align="center"><a href='https://www.eduonix.com/project-in-devops-learn-real-world-devops?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/04.jpg'></a></td> <td> &nbsp;</td> </tr>
 <tr>
-<td><a href='https://www.eduonix.com/angular-4-the-complete-guide?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='5.jpg'></a></td> <td> &nbsp;</td> 
-<td><a href='https://www.eduonix.com/react-the-complete-guide-incl-redux?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='6.jpg'></a></td> <td> &nbsp;</td> </tr>
+<td align="center"><a href='https://www.eduonix.com/front-end-web-development-bootcamp-build-a-twitter-clone?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/05.jpg'></a></td> <td> &nbsp;</td> 
+<td align="center"><a href='https://www.eduonix.com/flutter-dart-the-complete-flutter-app-development-course?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/06.jpg'></a></td> <td> &nbsp;</td> </tr>
 <tr>
-<td><a href='https://www.eduonix.com/flutter-dart-the-complete-flutter-app-development-course?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='7.jpg'></a></td> <td> &nbsp;</td> 
-<td><a href='https://www.eduonix.com/courses/Web-Development/learn-to-create-wordpress-themes-by-building-10-projects?utm_source=emailer&utm_medium=email11&utm_campaign=99-rs-sale-2019'><img src='8.jpg'></a></td> <td> &nbsp;</td> </tr>
+<td align="center"><a href='https://www.eduonix.com/learn-machine-learning-by-building-projects?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/07.jpg'></a></td> <td> &nbsp;</td> 
+<td align="center"><a href='https://www.eduonix.com/angular-4-the-complete-guide?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://www.eduonix.com/mailing_img/mailing_5aug19_ind/BOGO/08.jpg'></a></td> <td> &nbsp;</td> </tr>
 </table></td>

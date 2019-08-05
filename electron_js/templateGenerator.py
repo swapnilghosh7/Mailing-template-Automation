@@ -13,8 +13,8 @@ def genertateTemplate(path,selection,R1,R2,C1,C2,templateName):
 	# sh = wb.sheet_names()
 	# print(sh)
 	# sheet = wb.sheet_by_index(1)
-	x = datetime.datetime.now()
-	dateToday = x.strftime("%d")+x.strftime("%b")+x.strftime("%y")
+	# x = datetime.datetime.now()
+	# dateToday = x.strftime("%d")+x.strftime("%b")+x.strftime("%y")
 	# templateName = "template"+dateToday
 	templateName = "temp"
 
@@ -30,7 +30,7 @@ def genertateTemplate(path,selection,R1,R2,C1,C2,templateName):
 		a.write("<tr>")
 		for j in range(0,selection):
 			col = i + j
-			data = """\n<td><a href='"""+sh.cell_value(col,C1-1)+"""'><img src='"""+sh.cell_value(col,C2-1)+"""'></a></td>"""
+			data = """\n<td align="center"><a href='"""+sh.cell_value(col,C1-1)+"""'><img src='"""+sh.cell_value(col,C2-1)+"""'></a></td>"""
 			if(selection>1):
 				data = data + """ <td> &nbsp;</td> """
 

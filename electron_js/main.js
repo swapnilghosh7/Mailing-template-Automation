@@ -1,6 +1,10 @@
 let $ = require('./jquery-3.4.1.min.js')
 let fs = require('fs')
+var http = require('http')
 let moment = require('moment')
+const fileDialog = require('file-dialog')
+var dialog = require('nw-dialog')
+
 let {PythonShell} = require('python-shell')
 let templateName;
 const spawnSync = require("child_process").spawnSync;
@@ -8,25 +12,31 @@ const spawnSync = require("child_process").spawnSync;
 
 dateStr = moment().format('D-MMM-YYYY');
 
+let stripSectionHtmlTemplate = $('.stripSection').html();
+let bannerSectionHtmlTemplate = $('.bannerSection').html();
+let sectionHtmlTemplate = $('.mailingSectionWrap').html();
+
 let banner = 1;
-$('.addMoreBanner').on('click', function(){
-	let htmlTemp = $('.bannerSection').html();
-	$("<div class='bannerSection mb-3 col-sm-12'>"+htmlTemp+"</div>").insertBefore('.bannerSection');
+$(document).on('click','.addMoreBanner', function(){
+	$("<div class='bannerSection mb-3 col-sm-12'>"+bannerSectionHtmlTemplate+"</div>").insertBefore('.bannerSection');
 });
-$('.addMoreStrip').on('click', function(){
-	let htmlTemp = $('.stripSection').html();
-	$("<div class='stripSection mb-3 col-sm-12'>"+htmlTemp+"</div>").insertBefore($(this).parent("div"));
+$(document).on('click','.addMoreStrip', function(){
+	$("<div class='stripSection htmlsection mb-3 col-sm-12'>"+stripSectionHtmlTemplate+"</div>").insertBefore($(this).parent("div"));
 });
-$('.addMoreSection').on('click', function(){
-	let htmlTemp = $('.mailingSectionWrap').html();
-	$("<div class='mailingSectionWrap htmlsection'>"+htmlTemp+"</div>").insertBefore($(this).parent("div"));
+$(document).on('click','.addMoreSection', function(){
+	
+	$("<div class='mailingSectionWrap htmlsection'>"+sectionHtmlTemplate+"</div>").insertBefore($(this).parent("div"));
 });
-$('.removeBanner').on('click', function(){
+$(document).on('click','.removeBanner', function(){
 	$(this).parent('.bannerSection').remove();
 });
-$('.removeStrip').on('click', function(){
-	$(this).parent('.bannerSection').remove();
+$(document).on('click','.removeStrip', function(){
+	$(this).parent('.stripSection').remove();
 });
+$(document).on('click','.removeSection', function(){
+	$(this).parents('.mailingSectionWrap').remove();
+});
+ 
 
 // ***********************Checkboxes*******************
 $('.logoCheckBox').on('click',()=>{
@@ -55,7 +65,7 @@ let bannerHtml;
 
 
 // *******************************getting value on click of submit****************
-$(".frontSubmitBtn").on('click',function(){
+$(".frontSubmitBtn,.frontPreviewBtn").on('click',function(){
 	if(!$(".templateNameInput").prop("disabled"))
 	{
 		templateName = $(".templateNameInput").val();
@@ -65,8 +75,13 @@ $(".frontSubmitBtn").on('click',function(){
 	logoUrl = ($(".logoInput").val())?$(".logoInput").val():"https://www.eduonix.com/assets/images/edu_logo_single.png";
 	
 	logoHtml = rowGenerator(utmLogo,logoUrl);
-
-	bannerHtml = htmlRowGen(".htmlsection");
+	if($(this).hasClass('frontPreviewBtn')){
+		bannerHtml = htmlRowPreviewGen(".htmlsection")
+	}
+	else{
+		bannerHtml = htmlRowGen(".htmlsection");
+	}
+	
 
 	let htmlFinal = `<!DOCTYPE html>
 	<html>
@@ -86,7 +101,7 @@ $(".frontSubmitBtn").on('click',function(){
 	            </tr>
 	            <tr>
 	                <td colspan="3" align="center" style="background-color: #ffffff; text-align: center; padding: 10px;">`+logoHtml+`
-	                </td></tr>` + bannerHtml +` <td style="background-color: #000;">
+	                </td></tr>` + bannerHtml +`<tr> <td style="background-color: #000;">
 	                    <table width="640">
 	                        <tr>
 	                            <td align="center" style="background-color:#000; color:#fff;">
@@ -137,8 +152,15 @@ $(".frontSubmitBtn").on('click',function(){
 	</html>`
 
 	console.log(htmlFinal);
+	if($(this).hasClass('frontPreviewBtn')){
+		$(".previewSection").html(htmlFinal);
+	}
+	else{
+		crateHtmlFile(htmlFinal);
 
-	crateHtmlFile(htmlFinal);
+	}
+
+	
 
 });
 
@@ -158,7 +180,7 @@ function htmlRowGen(targetElement){
 	 		C2 = $(this).find(".img-col").val();
 	 		valueList.push(coloumn,R1,R2,C1,C2,templateName);
 	 		
-	 		let options = {args: valueList}
+	 		// let options = {args: valueList}
 			// PythonShell.run('project.py', options, function  (err, results)  {
 			//  if  (err)  throw err;
 			// 	 console.log('project.py finished.');
@@ -172,6 +194,51 @@ function htmlRowGen(targetElement){
 	 	else{
 			let utm_link = $(this).find('.utmLink').val();
 			let img_url = $(this).find('.img_url').val();
+			htmlDataRow = htmlDataRow + rowGeneratorWidtr(utm_link, img_url);
+
+	 	}
+
+
+	});
+
+	return htmlDataRow;
+
+}
+
+// ************************************Html Preview Section **************************
+function htmlRowPreviewGen(targetElement){
+	let htmlDataRow = "";
+	 $(targetElement).each(function(){
+	 	if($(this).hasClass("mailingSectionWrap"))
+	 	{
+	 		let valueList = [];
+	 		coloumn = $(this).find(".col-num").val();
+	 		R1 = $(this).find(".row-start").val();
+	 		R2 = $(this).find(".row-end").val();
+	 		C1 = $(this).find(".utm-col").val();
+	 		C2 = $(this).find(".img-col").val();
+	 		valueList.push(coloumn,R1,R2,C1,C2,templateName);
+	 		console.log(valueList);
+	 		// let options = {args: valueList}
+			// PythonShell.run('project.py', options, function  (err, results)  {
+			//  if  (err)  throw err;
+			// 	 console.log('project.py finished.');
+			// });
+			var result = spawnSync("python preview.py",valueList,{ stdio: 'inherit',shell: true });
+			var data = fs.readFileSync('preview.txt', 'utf8')
+			htmlDataRow = htmlDataRow + data;
+			console.log(htmlDataRow);
+	 	}
+	 	else{
+			let utm_link = $(this).find('.utmLink').val();
+			let img_url;
+			if($(this).hasClass("stripSection")){
+				img_url = "https://via.placeholder.com/400x50.png?text=Strip";
+			}
+			else if($(this).hasClass("bannerSection"))
+			{
+				img_url = "https://via.placeholder.com/600x400.png?text=Banner";
+			}
 			htmlDataRow = htmlDataRow + rowGeneratorWidtr(utm_link, img_url);
 
 	 	}
@@ -199,7 +266,9 @@ function rowGenerator(utm,imgUrl){
 	return data;
 }
 function rowGeneratorWidtr(utm,imgUrl){
-	let data = `<tr>
+	let data = `<tr>    
+                <td colspan="3">&nbsp;</td>
+            </tr><tr>
                 <td colspan="3" align="center">`;
 	let endData = "";
 	if(utm != ""){
@@ -211,16 +280,64 @@ function rowGeneratorWidtr(utm,imgUrl){
 		endData = endData + "</td></tr>"
 		data = data + "<img src='"+imgUrl+"'>"+endData;
 	}
+	data = data +`<tr>    
+                <td colspan="3">&nbsp;</td>
+            </tr>`
 	return data;
 }
-// Creating HTML
+//================================== Creating HTML
 function crateHtmlFile(htmlFinal){
 	fs.writeFile(templateName, htmlFinal, function(err) {
     if(err) {
         return alert(err)
     }
-    console.log("The file was saved!")
-	}) 
+    else{
+  //   	fs.readFile('./'+templateName, function (err, html) {
+  //   if (err) {
+  //       throw err; 
+  //   }       
+  //   http.createServer(function(request, response) {  
+  //       response.writeHeader(200, {"Content-Type": "text/html"});  
+  //       response.write(html);  
+  //       response.end();  
+		//     }).listen(8080);
+		// }); 
+		alert("file sAVED");
+	}
+  });
 }
 
+// ============================Creating Html===============
+// function save data
+$(document).on('click',".frontSaveBtn",function(){
+	saveData();
+});
 
+function saveData(){
+	// $("input").each(function(){
+	// 	$(this).val($(this).val());
+	// });
+	dialog.saveFileDialog(function(result) {
+	    alert(result)
+	})
+
+	// You can obviously give a direct path without use the dialog (C:/Program Files/path/myfileexample.txt)
+	// fileDialog({
+ //    save: true,
+ //    accept: '.html'
+ //  }, function (data) {
+ //    console.log(data)
+ //  });
+}
+$(document).on('click',".frontOpenBtn",function(){
+	openFile();
+});
+
+function openFile(){
+	fileDialog({
+    multiple: true,
+    accept: '.html'
+  }, function (data) {
+    console.log(data)
+  });
+}

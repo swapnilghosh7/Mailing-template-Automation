@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron');
+const {app, BrowserWindow,Menu} = require('electron');
 const url = require('url');
 const path = require('path');
 let fs = require('fs')
@@ -16,5 +16,22 @@ function createWindow() {
    }));
 
 }  
+// const template = [
+//   {
+//     label: 'File',
+//     submenu: [
+//       { role: 'quit' },
+//       { label: 'Save',
+//       	role: 'save' },
+//       { label: 'Open',
+//       	role: 'Open' },
+// 	   { label: 'Save As',
+// 	  	role: 'SaveAs' }
+//     ]
+//   }
+// ]
+
+// const menu = Menu.buildFromTemplate(template)
+// Menu.setApplicationMenu(menu)
 
 app.on('ready', createWindow)

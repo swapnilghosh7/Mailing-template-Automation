@@ -1,11 +1,26 @@
+body{
+	font-size: 12px;
+}
+.container{
+	max-width: 100%;
+}
 .removeBanner,.removeStrip{
 	font-size: 10px;
 	padding: 5px 10px;
 }
 .template-input{
 	width: 50px;
-	margin-right: 30px;
+	margin-right: 5px;
 }
 .templateNameInput{
 	width: 300px;
+}
+.btn-Wrap button{
+	font-size: 10px;
+}
+.btn-Wrap{
+	text-align: center;
+}
+h2{
+	font-size: 15px !important;
 }
