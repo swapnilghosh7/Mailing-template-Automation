@@ -136,6 +136,8 @@ $(".frontSubmitBtn").on('click',function(){
 
 	</html>`
 
+	console.log(htmlFinal);
+
 	crateHtmlFile(htmlFinal);
 
 });
@@ -163,11 +165,9 @@ function htmlRowGen(targetElement){
 			// });
 			var result = spawnSync("python project.py",valueList,{ stdio: 'inherit',shell: true });
 			console.log(result);
-			fs.readFile('temp.txt', 'utf8', function(err, data) {
-				if (err) throw err;
-				htmlDataRow = htmlDataRow + data;
-				console.log(htmlDataRow);
-			 });
+			var data = fs.readFileSync('temp.txt', 'utf8')
+			htmlDataRow = htmlDataRow + data;
+			console.log(htmlDataRow);
 	 	}
 	 	else{
 			let utm_link = $(this).find('.utmLink').val();
