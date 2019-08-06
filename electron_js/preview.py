@@ -13,6 +13,10 @@ for index,x in enumerate(sys.argv):
 		C1 = x
 	if (index == 5):
 		C2 = x
+	if (index == 6):
+		path = x
+	if (index == 7):
+		name = x
 
 selection = int(selection,10)
 R1 = int(R1,10)
@@ -20,10 +24,8 @@ R2 = int(R2,10)
 C1 = int(C1,10)
 C2 = int(C2,10)
 
-path ='June19-Mailing.xlsx'
-
 wb = xlrd.open_workbook(path)
-sh = wb.sheet_by_name("28 June'19")
+sh = wb.sheet_by_name(name)
 
 
 templateName = "preview"

@@ -1,4 +1,4 @@
-def genertateTemplate(path,selection,R1,R2,C1,C2,templateName):
+def genertateTemplate(path,selection,R1,R2,C1,C2,templateName,name):
 
 	selection = int(selection,10)
 	R1 = int(R1,10)
@@ -9,7 +9,7 @@ def genertateTemplate(path,selection,R1,R2,C1,C2,templateName):
 	import datetime
 
 	wb = xlrd.open_workbook(path)
-	sh = wb.sheet_by_name("28 June'19")
+	sh = wb.sheet_by_name(name)
 	# sh = wb.sheet_names()
 	# print(sh)
 	# sheet = wb.sheet_by_index(1)

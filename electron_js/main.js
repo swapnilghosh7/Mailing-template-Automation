@@ -9,8 +9,9 @@ let {PythonShell} = require('python-shell')
 let templateName;
 const spawnSync = require("child_process").spawnSync;
 
-
 dateStr = moment().format('D-MMM-YYYY');
+monthYear = moment().format('MMMYY');
+console.log(monthYear);
 
 let stripSectionHtmlTemplate = $('.stripSection').html();
 let bannerSectionHtmlTemplate = $('.bannerSection').html();
@@ -136,7 +137,7 @@ $(".frontSubmitBtn,.frontPreviewBtn").on('click',function(){
 	                                                href="https://www.eduonix.com/sitemap" target="_blank"
 	                                                style="color:#fff; text-decoration:none;">Sitemap</a>
 	                                            <br> <a
-	                                                href="https://www.eduonix.com/offers/emails/jul19/template_30july19_ind.html"
+	                                                href="https://www.eduonix.com/offers/emails/`+monthYear+"/"+templateName+`.html
 	                                                style="color:#fff; font-family: Arial;">View In Browser</a></td>
 	                                    </tr>
 	                                </table>
@@ -178,7 +179,9 @@ function htmlRowGen(targetElement){
 	 		R2 = $(this).find(".row-end").val();
 	 		C1 = $(this).find(".utm-col").val();
 	 		C2 = $(this).find(".img-col").val();
-	 		valueList.push(coloumn,R1,R2,C1,C2,templateName);
+	 		path = $(".excelSheetPath").val();
+	 		name = $(".excelSheetName").val();
+	 		valueList.push(coloumn,R1,R2,C1,C2,templateName,path,name);
 	 		
 	 		// let options = {args: valueList}
 			// PythonShell.run('project.py', options, function  (err, results)  {
@@ -217,7 +220,9 @@ function htmlRowPreviewGen(targetElement){
 	 		R2 = $(this).find(".row-end").val();
 	 		C1 = $(this).find(".utm-col").val();
 	 		C2 = $(this).find(".img-col").val();
-	 		valueList.push(coloumn,R1,R2,C1,C2,templateName);
+	 		path = $(".excelSheetPath").val();
+	 		name = $(".excelSheetName").val();
+	 		valueList.push(coloumn,R1,R2,C1,C2,path,name);
 	 		console.log(valueList);
 	 		// let options = {args: valueList}
 			// PythonShell.run('project.py', options, function  (err, results)  {
@@ -266,9 +271,7 @@ function rowGenerator(utm,imgUrl){
 	return data;
 }
 function rowGeneratorWidtr(utm,imgUrl){
-	let data = `<tr>    
-                <td colspan="3">&nbsp;</td>
-            </tr><tr>
+	let data = `<tr>
                 <td colspan="3" align="center">`;
 	let endData = "";
 	if(utm != ""){
@@ -292,16 +295,19 @@ function crateHtmlFile(htmlFinal){
         return alert(err)
     }
     else{
-  //   	fs.readFile('./'+templateName, function (err, html) {
+  //   	fs.readFile(templateName, function (err, html) {
   //   if (err) {
   //       throw err; 
-  //   }       
-  //   http.createServer(function(request, response) {  
+  //   } 
+  //   else{
+  //   	    http.createServer(function(request, response) {  
   //       response.writeHeader(200, {"Content-Type": "text/html"});  
   //       response.write(html);  
   //       response.end();  
-		//     }).listen(8080);
-		// }); 
+		//     }).listen(8000);
+		// }
+  //   });      
+
 		alert("file sAVED");
 	}
   });
