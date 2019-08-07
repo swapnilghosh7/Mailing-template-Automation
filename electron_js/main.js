@@ -137,8 +137,7 @@ $(".frontSubmitBtn,.frontPreviewBtn").on('click',function(){
 	                                                href="https://www.eduonix.com/sitemap" target="_blank"
 	                                                style="color:#fff; text-decoration:none;">Sitemap</a>
 	                                            <br> <a
-	                                                href="https://www.eduonix.com/offers/emails/`+monthYear+"/"+templateName+`.html
-	                                                style="color:#fff; font-family: Arial;">View In Browser</a></td>
+	                                                href="https://www.eduonix.com/offers/emails/`+monthYear+"/"+templateName+`" style="color:#fff; font-family: Arial;">View In Browser</a></td>
 	                                    </tr>
 	                                </table>
 	                            </td>
