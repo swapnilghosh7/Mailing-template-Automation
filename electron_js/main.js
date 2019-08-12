@@ -60,7 +60,7 @@ $(document).on('click','.templateName',()=>{
 // **********************Radio Button ********************
 $(document).on('click',"input[type='radio'].radioCountry",function(){
             let radioValue = $("input[name='radioCountry']:checked").val();
-			templateName = "template_"+dateStr+"_"+radioValue+".php";
+			templateName = "template_"+dateStr+"_"+radioValue+".html";
             $(".templateNameInput").val(templateName);
 });
 
@@ -302,15 +302,15 @@ function crateHtmlFile(htmlFinal){
 	if(htmlFinal.indexOf(viewInBrwser)>=0){
 		console.log("found");
 		htmlFinalViewInBrowser = htmlFinal.replace(viewInBrwser," ");
-		viewInBrwserTemplate = templateName.replace(".php",".html");
-		fs.writeFile(viewInBrwserTemplate, htmlFinalViewInBrowser, function(err) {
+		
+		fs.writeFile(templateName, htmlFinalViewInBrowser, function(err) {
 		    if(err) {
 		        return alert(err)
 		    }
 		  });
 	}
-
-	fs.writeFile(templateName, htmlFinal, function(err) {
+   let finalTemplate = templateName.replace(".html",".php");
+	fs.writeFile(finalTemplate, htmlFinal, function(err) {
     if(err) {
         return alert(err)
     }
