@@ -1,0 +1,133 @@
+
+		<h1 class="text-center mb-3">Mailing Template Creator</h1>
+		<div class="mail_selector">
+			<div class="radioWrap">
+				<label class="mr-1" for="radio_ind">India</label><input class="radioCountry mr-3" type="radio" name="radioCountry" value="ind">
+
+				<label class="mr-1" for="radio_usa">USA</label><input class="radioCountry mr-3" type="radio" name="radioCountry" value="us">
+
+				<label class="mr-1" for="radio_row">Row</label><input class="radioCountry mr-3" type="radio" name="radioCountry" value="row">
+			</div>
+			<label class="mr-2">Custom template Name </label><input class="templateName" type="checkbox" name="colorCheckbox">
+			<input class="templateNameInput" type="text" disabled="true" value="template_12-Aug-2019_ind.php">
+		</div>
+
+		<div class="subject_line mt-3">
+				<label class="mr-1" for="radio_ind">Subject Header</label><input type="text" class="subjectHeader" value="Subject Header">
+		</div>
+		<div class="excelSheetPathWrap">
+			<label class="mr-1">Excel Sheet path</label><input type="text" class="excelSheetPath" value="fdsafsdf">
+			<label class="mr-1">Sheet Name</label><input type="text" class="excelSheetName" value="asdfsad">
+
+		</div>
+		<div id="mainSection" class="mainSection row clearfix">
+			<div class="logoUtmWrap mb-3 col-sm-12" draggable="false">
+				<h2 class="mb-2 mt-4 text-left">Logo Section</h2>
+				  <label>Utm Link</label>
+				  <input class="logoUtm" type="text" value="sadfasdf">
+		  		  <label>Image URL</label>
+			  		 <input class="logoCheckBox" type="checkbox" name="colorCheckbox" value="1">
+				  <input class="logoInput" type="text" disabled="true" value="https://www.eduonix.com/assets/images/edu_logo_single.png">
+			</div>
+			<div class="bannerSection htmlsection mb-3 col-sm-12" draggable="false">
+				<h2 class="mb-2 mt-4 text-left">Banner Section</h2>
+				  <label>Utm Link</label>
+				  <input type="text" class="bannerUrl utmLink" value="sadfsad">
+
+		  		  <label>Image URL</label>
+				  <input type="text" class="bannerImgUrl img_url" value="sdafasd">
+				  <button class="removeBanner btn btn-danger">Remove</button>
+
+			</div>
+			<div class="btn-Wrap w-100 mt-2">
+				<button class="addMoreBanner btn btn-primary">Add More Banner</button>
+			</div>
+			<div class="stripSection htmlsection mb-3 col-sm-12" draggable="false">
+				<h2 class="mb-2 mt-4 text-left">Strip Section</h2>
+				  <label>Utm Link</label>
+				  <input type="text" class="stripUrl utmLink" value="asdfasdf">
+
+		  		  <label>Image URL</label>
+				  <input type="text" class="stripImgUrl img_url" value="asdfasd">
+					<button class="removeStrip btn btn-danger">Remove</button>
+
+			</div>
+			<div class="btn-Wrap w-100 mt-2">
+				<button class="addMoreStrip btn btn-primary">Add More Strip</button>
+			</div>
+			<div class="mailingSectionWrap htmlsection" draggable="false">
+					<div class="mailingSection mb-3 col-sm-12">
+						<h2 class="mb-2 mt-4 text-left">Template Section</h2>
+						  <label>Coloumn</label>
+						  <input type="text" class="template-input col-num" value="2">
+
+				  		  <label>Start Row</label>
+						  <input type="text" class="template-input row-start" value="4">
+						  <label>End Row</label>
+						  <input type="text" class="template-input row-end" value="4">
+						  <label>UTM Col</label>
+						  <input type="text" class="template-input utm-col" value="2">
+		  				  <label>Img Url Col</label>
+						  <input type="text" class="template-input img-col" value="3">
+						<div class="btn-wrap text-center">
+							<button class="removeSection btn btn-danger">Remove</button>
+						</div>
+					</div>
+			</div>
+			<div class="stripSection mb-3 col-sm-12 htmlsection" draggable="false">
+				<h2 class="mb-2 mt-4 text-left">Strip Section</h2>
+				  <label>Utm Link</label>
+				  <input type="text" class="stripUrl utmLink" value="dfasdf">
+
+		  		  <label>Image URL</label>
+				  <input type="text" class="stripImgUrl img_url" value="adsfasdf">
+					<button class="removeStrip btn btn-danger">Remove</button>
+
+			</div>
+			<div class="mailingSectionWrap htmlsection" draggable="false">
+					<div class="mailingSection mb-3 col-sm-12">
+						<h2 class="mb-2 mt-4 text-left">Template Section</h2>
+						  <label>Coloumn</label>
+						  <input type="text" class="template-input col-num" value="2">
+
+				  		  <label>Start Row</label>
+						  <input type="text" class="template-input row-start" value="3">
+						  <label>End Row</label>
+						  <input type="text" class="template-input row-end" value="2">
+						  <label>UTM Col</label>
+						  <input type="text" class="template-input utm-col" value="5">
+		  				  <label>Img Url Col</label>
+						  <input type="text" class="template-input img-col" value="7">
+						<div class="btn-wrap text-center">
+							<button class="removeSection btn btn-danger">Remove</button>
+						</div>
+					</div>
+			</div><div class="stripSection htmlsection mb-3 col-sm-12" draggable="false">
+				<h2 class="mb-2 mt-4 text-left">Strip Section</h2>
+				  <label>Utm Link</label>
+				  <input type="text" class="stripUrl utmLink" value="dsfafsadf">
+
+		  		  <label>Image URL</label>
+				  <input type="text" class="stripImgUrl img_url" value="asdfasdf">
+					<button class="removeStrip btn btn-danger">Remove</button>
+
+			</div><div class="btn-Wrap w-100 mt-2" draggable="false">
+				<button class="addMoreStrip btn btn-primary">Add More Strip</button>
+				<button class="addMoreSection btn btn-primary">Add More Section</button> 
+			</div>
+		</div>
+		
+		<div class="btn-Wrap mt-4 text-center">
+		<button class="frontSubmitBtn btn btn-primary">Submit</button>			
+		</div>
+		<div class="btn-Wrap mt-4 text-center">
+			<button class="frontPreviewBtn btn btn-primary">Preview</button>			
+		</div>
+		<div class="btn-Wrap mt-4 text-center">
+			<button class="frontSaveBtn btn btn-primary">Save</button>			
+		</div>
+		<div class="btn-Wrap mt-4 text-center">
+			<button class="frontOpenBtn btn btn-primary">Open</button>			
+		</div>
+		<!-- =======Main Section === -->
+		

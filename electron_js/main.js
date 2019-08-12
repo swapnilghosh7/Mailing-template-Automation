@@ -4,22 +4,30 @@ var http = require('http')
 let moment = require('moment')
 const fileDialog = require('file-dialog')
 var dialog = require('nw-dialog')
+// import Sortable from 'sortablejs';
+let Sortable = require('sortablejs')
+// import Sortable from 'sortablejs/modular/sortable.core.esm.js';
+
 
 let {PythonShell} = require('python-shell')
 let templateName;
 const spawnSync = require("child_process").spawnSync;
 
 dateStr = moment().format('D-MMM-YYYY');
-monthYear = moment().format('MMMYY');
-console.log(monthYear);
+monthYear = moment().format('MMMYY').toLowerCase();
 
-let stripSectionHtmlTemplate = $('.stripSection').html();
-let bannerSectionHtmlTemplate = $('.bannerSection').html();
-let sectionHtmlTemplate = $('.mailingSectionWrap').html();
+
+console.log(monthYear);
+// *********************Sortable******************************
+var el = document.getElementById('mainSection');
+var sortable = Sortable.create(el);
+const stripSectionHtmlTemplate = $('.stripSection').html();
+const bannerSectionHtmlTemplate = $('.bannerSection').html();
+const sectionHtmlTemplate = $('.mailingSectionWrap').html();
 
 let banner = 1;
 $(document).on('click','.addMoreBanner', function(){
-	$("<div class='bannerSection mb-3 col-sm-12'>"+bannerSectionHtmlTemplate+"</div>").insertBefore('.bannerSection');
+	$("<div class='bannerSection htmlsection mb-3 col-sm-12'>"+bannerSectionHtmlTemplate+"</div>").insertBefore($(this).parent("div"));
 });
 $(document).on('click','.addMoreStrip', function(){
 	$("<div class='stripSection htmlsection mb-3 col-sm-12'>"+stripSectionHtmlTemplate+"</div>").insertBefore($(this).parent("div"));
@@ -40,19 +48,19 @@ $(document).on('click','.removeSection', function(){
  
 
 // ***********************Checkboxes*******************
-$('.logoCheckBox').on('click',()=>{
+$(document).on('click','.logoCheckBox',()=>{
 	let value = $('.logoCheckBox').is(":checked");
 	$('.logoInput').prop("disabled", !value);
 });
-$('.templateName').on('click',()=>{
+$(document).on('click','.templateName',()=>{
 	let value = $('.templateName').is(":checked");
 	$('.templateNameInput').prop("disabled", !value);
 });
 // ***********************Checkbox End*******************
 // **********************Radio Button ********************
-$("input[type='radio'].radioCountry").click(function(){
+$(document).on('click',"input[type='radio'].radioCountry",function(){
             let radioValue = $("input[name='radioCountry']:checked").val();
-			templateName = "template_"+dateStr+"_"+radioValue+".html";
+			templateName = "template_"+dateStr+"_"+radioValue+".php";
             $(".templateNameInput").val(templateName);
 });
 
@@ -66,7 +74,7 @@ let bannerHtml;
 
 
 // *******************************getting value on click of submit****************
-$(".frontSubmitBtn,.frontPreviewBtn").on('click',function(){
+$(document).on('click',".frontSubmitBtn,.frontPreviewBtn",function(){
 	if(!$(".templateNameInput").prop("disabled"))
 	{
 		templateName = $(".templateNameInput").val();
@@ -74,10 +82,11 @@ $(".frontSubmitBtn,.frontPreviewBtn").on('click',function(){
 	subline = $(".subject_line").find("input").val();
 	utmLogo = $(".logoUtm").val();
 	logoUrl = ($(".logoInput").val())?$(".logoInput").val():"https://www.eduonix.com/assets/images/edu_logo_single.png";
+	console.log(utmLogo);
 	
 	logoHtml = rowGenerator(utmLogo,logoUrl);
 	if($(this).hasClass('frontPreviewBtn')){
-		bannerHtml = htmlRowPreviewGen(".htmlsection")
+		bannerHtml = htmlRowGen(".htmlsection")
 	}
 	else{
 		bannerHtml = htmlRowGen(".htmlsection");
@@ -188,8 +197,7 @@ function htmlRowGen(targetElement){
 			// 	 console.log('project.py finished.');
 			// });
 			var result = spawnSync("python project.py",valueList,{ stdio: 'inherit',shell: true });
-			console.log(result);
-			var data = fs.readFileSync('temp.txt', 'utf8')
+			var data = fs.readFileSync('temp.txt', 'utf8');
 			htmlDataRow = htmlDataRow + data;
 			console.log(htmlDataRow);
 	 	}
@@ -208,51 +216,51 @@ function htmlRowGen(targetElement){
 }
 
 // ************************************Html Preview Section **************************
-function htmlRowPreviewGen(targetElement){
-	let htmlDataRow = "";
-	 $(targetElement).each(function(){
-	 	if($(this).hasClass("mailingSectionWrap"))
-	 	{
-	 		let valueList = [];
-	 		coloumn = $(this).find(".col-num").val();
-	 		R1 = $(this).find(".row-start").val();
-	 		R2 = $(this).find(".row-end").val();
-	 		C1 = $(this).find(".utm-col").val();
-	 		C2 = $(this).find(".img-col").val();
-	 		path = $(".excelSheetPath").val();
-	 		name = $(".excelSheetName").val();
-	 		valueList.push(coloumn,R1,R2,C1,C2,path,name);
-	 		console.log(valueList);
-	 		// let options = {args: valueList}
-			// PythonShell.run('project.py', options, function  (err, results)  {
-			//  if  (err)  throw err;
-			// 	 console.log('project.py finished.');
-			// });
-			var result = spawnSync("python preview.py",valueList,{ stdio: 'inherit',shell: true });
-			var data = fs.readFileSync('preview.txt', 'utf8')
-			htmlDataRow = htmlDataRow + data;
-			console.log(htmlDataRow);
-	 	}
-	 	else{
-			let utm_link = $(this).find('.utmLink').val();
-			let img_url;
-			if($(this).hasClass("stripSection")){
-				img_url = "https://via.placeholder.com/400x50.png?text=Strip";
-			}
-			else if($(this).hasClass("bannerSection"))
-			{
-				img_url = "https://via.placeholder.com/600x400.png?text=Banner";
-			}
-			htmlDataRow = htmlDataRow + rowGeneratorWidtr(utm_link, img_url);
+// function htmlRowPreviewGen(targetElement){
+// 	let htmlDataRow = "";
+// 	 $(targetElement).each(function(){
+// 	 	if($(this).hasClass("mailingSectionWrap"))
+// 	 	{
+// 	 		let valueList = [];
+// 	 		coloumn = $(this).find(".col-num").val();
+// 	 		R1 = $(this).find(".row-start").val();
+// 	 		R2 = $(this).find(".row-end").val();
+// 	 		C1 = $(this).find(".utm-col").val();
+// 	 		C2 = $(this).find(".img-col").val();
+// 	 		path = $(".excelSheetPath").val();
+// 	 		name = $(".excelSheetName").val();
+// 	 		valueList.push(coloumn,R1,R2,C1,C2,path,name);
+// 	 		console.log(valueList);
+// 	 		// let options = {args: valueList}
+// 			// PythonShell.run('project.py', options, function  (err, results)  {
+// 			//  if  (err)  throw err;
+// 			// 	 console.log('project.py finished.');
+// 			// });
+// 			var result = spawnSync("python preview.py",valueList,{ stdio: 'inherit',shell: true });
+// 			var data = fs.readFileSync('preview.txt', 'utf8')
+// 			htmlDataRow = htmlDataRow + data;
+// 			console.log(htmlDataRow);
+// 	 	}
+// 	 	else{
+// 			let utm_link = $(this).find('.utmLink').val();
+// 			let img_url;
+// 			if($(this).hasClass("stripSection")){
+// 				img_url = "https://via.placeholder.com/400x50.png?text=Strip";
+// 			}
+// 			else if($(this).hasClass("bannerSection"))
+// 			{
+// 				img_url = "https://via.placeholder.com/600x400.png?text=Banner";
+// 			}
+// 			htmlDataRow = htmlDataRow + rowGeneratorWidtr(utm_link, img_url);
 
-	 	}
+// 	 	}
 
 
-	});
+// 	});
 
-	return htmlDataRow;
+// 	return htmlDataRow;
 
-}
+// }
 
 
 // ********************************Functions*************************
@@ -289,25 +297,26 @@ function rowGeneratorWidtr(utm,imgUrl){
 }
 //================================== Creating HTML
 function crateHtmlFile(htmlFinal){
+	viewInBrwser = `<br> <a
+	                                                href="https://www.eduonix.com/offers/emails/`+monthYear+"/"+templateName+`" style="color:#fff; font-family: Arial;">View In Browser</a>`
+	if(htmlFinal.indexOf(viewInBrwser)>=0){
+		console.log("found");
+		htmlFinalViewInBrowser = htmlFinal.replace(viewInBrwser," ");
+		viewInBrwserTemplate = templateName.replace(".php",".html");
+		fs.writeFile(viewInBrwserTemplate, htmlFinalViewInBrowser, function(err) {
+		    if(err) {
+		        return alert(err)
+		    }
+		  });
+	}
+
 	fs.writeFile(templateName, htmlFinal, function(err) {
     if(err) {
         return alert(err)
     }
     else{
-  //   	fs.readFile(templateName, function (err, html) {
-  //   if (err) {
-  //       throw err; 
-  //   } 
-  //   else{
-  //   	    http.createServer(function(request, response) {  
-  //       response.writeHeader(200, {"Content-Type": "text/html"});  
-  //       response.write(html);  
-  //       response.end();  
-		//     }).listen(8000);
-		// }
-  //   });      
-
-		alert("file sAVED");
+		alert("file Saved");
+		saveData();
 	}
   });
 }
@@ -319,20 +328,29 @@ $(document).on('click',".frontSaveBtn",function(){
 });
 
 function saveData(){
-	// $("input").each(function(){
-	// 	$(this).val($(this).val());
-	// });
-	dialog.saveFileDialog(function(result) {
-	    alert(result)
-	})
+	
+	var saveDataArr = new Array();
+	$("input[type='text']").each(function(){
+		var dataValue = $(this).val();
+		$(this).attr('value',dataValue);
 
-	// You can obviously give a direct path without use the dialog (C:/Program Files/path/myfileexample.txt)
-	// fileDialog({
- //    save: true,
- //    accept: '.html'
- //  }, function (data) {
- //    console.log(data)
- //  });
+});
+	console.log(templateName);
+	let savetempName = templateName.replace(".php","_save.txt");
+	var saveTemplateHtml = $(".templateSection").html();
+	var dir = "./saveData";
+	if (!fs.existsSync(dir)){
+		fs.mkdirSync(dir);
+	}
+	fs.writeFile("./saveData/"+savetempName,saveTemplateHtml, function(err) {
+    if(err) {
+        return alert(err)
+    }
+    else{
+    	alert("file saved");
+    }
+	
+	});
 }
 $(document).on('click',".frontOpenBtn",function(){
 	openFile();
@@ -341,8 +359,10 @@ $(document).on('click',".frontOpenBtn",function(){
 function openFile(){
 	fileDialog({
     multiple: true,
-    accept: '.html'
+    accept: '.txt'
   }, function (data) {
-    console.log(data)
+    var dataHtml = fs.readFileSync(data[0]['path'], 'utf8');
+    $('.templateSection').html(dataHtml);
+
   });
 }

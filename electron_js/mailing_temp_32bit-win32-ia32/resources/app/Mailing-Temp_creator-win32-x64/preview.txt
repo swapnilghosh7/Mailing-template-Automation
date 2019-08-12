@@ -1,6 +1,0 @@
-<tr><td colspan="3"> &nbsp;</td></tr>
-<tr>
-<td align="center"><a href='https://www.eduonix.com/ai-machine-learning-edegree?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://via.placeholder.com/600x400.png?text=Preview'></a></td></tr>
- <tr><td colspan="3"> &nbsp;</td></tr><tr>
-<td align="center"><a href='https://www.eduonix.com/mern-stack-developer-e-degree?utm_source=emailer&utm_medium=email5&utm_campaign=friendship-bogo-sale-ind-2019'><img src='https://via.placeholder.com/600x400.png?text=Preview'></a></td></tr>
- <tr><td colspan="3"> &nbsp;</td></tr>

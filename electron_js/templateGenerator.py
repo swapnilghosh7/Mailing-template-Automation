@@ -22,7 +22,7 @@ def genertateTemplate(path,selection,R1,R2,C1,C2,templateName,name):
 	if(selection > 1):
 		data = doubleColHtml
 	else:
-		data = """<tr><td colspan="3"> &nbsp;</td></tr>\n"""
+		data = """ """
 
 	a =  open(templateName+".txt", "w+")
 	a.write(data)
@@ -36,7 +36,7 @@ def genertateTemplate(path,selection,R1,R2,C1,C2,templateName,name):
 
 			a =  open(templateName+".txt", "a")
 			a.write(data)
-		a.write("""</tr>\n""")
+		a.write("""</tr>\n<tr><td colspan="3"> &nbsp;</td></tr>\n""")
 
 	if(selection > 1):
 		a =  open(templateName+".txt", "a")
