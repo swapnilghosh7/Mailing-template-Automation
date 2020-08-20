@@ -14,7 +14,7 @@
     "electron-packager": "^14.0.4"
   },
   "dependencies": {
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "dialog": "^0.3.1",
     "file-dialog": "0.0.7",
     "moment": "^2.24.0",
