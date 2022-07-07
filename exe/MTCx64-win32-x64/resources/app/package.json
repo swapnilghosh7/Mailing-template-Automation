@@ -17,7 +17,7 @@
     "bcrypt": "^3.0.6",
     "dialog": "^0.3.1",
     "file-dialog": "0.0.7",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "nw-dialog": "^1.0.7",
     "python-shell": "^1.0.7",
     "request": "^2.88.0",
